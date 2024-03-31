@@ -1,0 +1,141 @@
+keyboards:
+
+  - Keyboard Name: Lily58
+    Number of Keys: [58]
+    Is Split?: true
+    Has Pinky Splay?: false
+    Stagger: column
+    Is Ortholinear?: false
+    Is Parametric?: false
+    Is Concave?: false
+    Is Open Source?: true
+    Has PCB?: true
+    Has Trackball?: false
+    Is Handwired?: false
+    Has Kit?: true
+    Can Be Bought Prebuilt?: true
+    Profile: High
+    Switch Type: MX
+    Switch Spacing: MX
+    Source Link: https://github.com/kata0510/Lily58
+    Image URL: https://user-images.githubusercontent.com/6285554/84393842-13960900-ac37-11ea-811e-65db2948ca73.jpg
+
+  - Keyboard Name: Reviung41
+    Number of Keys: [41]
+    Is Split?: false
+    Has Pinky Splay?: false
+    Stagger: column
+    Is Ortholinear?: false
+    Is Parametric?: false
+    Is Concave?: false
+    Is Open Source?: true
+    Has PCB?: true
+    Has Trackball?: false
+    Is Handwired?: false
+    Has Kit?: true
+    Can Be Bought Prebuilt?: false
+    Profile: low
+    Switch Type: MX
+    Switch Spacing: MX
+    Source Link: https://github.com/gtips/reviung/tree/master/reviung41
+    Image URL: https://raw.githubusercontent.com/gtips/reviung/master/reviung41/image/REVIUNG41B-1.jpg
+
+  - Keyboard Name: Osprette
+    Number of Keys: [34]
+    Is Split?: false
+    Has Pinky Splay?: false
+    Stagger: column
+    Is Ortholinear?: false
+    Is Parametric?: false
+    Is Concave?: false
+    Is Open Source?: true
+    Has PCB?: true
+    Has Trackball?: false
+    Is Handwired?: false
+    Has Kit?: true
+    Can Be Bought Prebuilt?: false
+    Profile: low
+    Switch Type: Choc V1
+    Switch Spacing: choc
+    Source Link: https://github.com/smores56/osprette
+    Image URL: https://raw.githubusercontent.com/smores56/osprette/main/images/osprette-front.jpg
+
+  - Keyboard Name: Dactyl Manuform
+    Number of Keys: [40, 60]
+    Is Split?: true
+    Has Pinky Splay?: false
+    Stagger: column
+    Is Ortholinear?: false
+    Is Parametric?: true
+    Is Concave?: true
+    Is Open Source?: true
+    Has PCB?: false
+    Has Trackball?: false
+    Is Handwired?: true
+    Has Kit?: false
+    Can Be Bought Prebuilt?: false
+    Profile: High
+    Switch Type: MX
+    Switch Spacing: MX
+    Source Link: https://github.com/abstracthat/dactyl-manuform
+    Image URL: https://camo.githubusercontent.com/3d431aa11a1b1314f7ead63224cbc909bc4dff656a4a65ce7e30139bdeb144f1/687474703a2f2f692e696d6775722e636f6d2f4c646a456872522e6a7067
+
+  - Keyboard Name: Corne
+    Number of Keys: [42]
+    Is Split?: true
+    Has Pinky Splay?: false
+    Stagger: column
+    Is Ortholinear?: false
+    Is Parametric?: false
+    Is Concave?: false
+    Is Open Source?: true
+    Has PCB?: true
+    Has Trackball?: false
+    Is Handwired?: false
+    Has Kit?: false
+    Can Be Bought Prebuilt?: false
+    Profile: High
+    Switch Type: MX
+    Switch Spacing: MX
+    Source Link: https://github.com/foostan/crkbd
+    Image URL: https://github.com/foostan/crkbd/assets/736191/bc32e4e8-f737-4516-b92b-55a7cb93a336
+
+  - Keyboard Name: Charybdis
+    Number of Keys: [35, 56]
+    Is Split?: true
+    Has Pinky Splay?: false
+    Stagger: column
+    Is Ortholinear?: false
+    Is Parametric?: false
+    Is Concave?: true
+    Is Open Source?: true
+    Has PCB?: true
+    Has Trackball?: true
+    Is Handwired?: true
+    Has Kit?: true
+    Can Be Bought Prebuilt?: true
+    Profile: High
+    Switch Type: MX
+    Switch Spacing: MX
+    Source Link: https://github.com/Bastardkb/Charybdis
+    Image URL: https://raw.githubusercontent.com/Bastardkb/Charybdis/main/pics/1ae.jpg
+
+  - Keyboard Name: Draculad
+    Number of Keys: [36]
+    Is Split?: true
+    Has Pinky Splay?: false
+    Stagger: column
+    Is Ortholinear?: false
+    Is Parametric?: false
+    Is Concave?: false
+    Is Open Source?: true
+    Has PCB?: true
+    Has Trackball?: true
+    Is Handwired?: false
+    Has Kit?: true
+    Can Be Bought Prebuilt?: false
+    Profile: High or Low
+    Switch Type: MX or Choc V1
+    Switch Spacing: MX
+    Source Link: https://github.com/MangoIV/dracuLad
+    Image URL: https://raw.githubusercontent.com/mangoiv/draculad/master/pictures/rev1/both_sides_underglow_oleds.jpg
