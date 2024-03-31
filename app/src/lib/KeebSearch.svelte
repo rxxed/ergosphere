@@ -1,9 +1,18 @@
 <script>
     export let numberOfKeyboards = 0;
     export let onSearchInput = () => {};
+
+    let searchTimeoutId;
+
+    function debounceSearch(event) {
+        clearTimeout(searchTimeoutId);
+        timeoutId = setTimeout(() => {
+            onSearchInput(event);
+        }, 300);
+    }
 </script>
 
-<input placeholder="Search {numberOfKeyboards} keyboards..." on:input={onSearchInput} />
+<input placeholder="Search {numberOfKeyboards} keyboards..." on:input={debounceSearch} />
 
 <style>
     input {
