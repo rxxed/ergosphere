@@ -6,7 +6,7 @@
 
     function debounceSearch(event) {
         clearTimeout(searchTimeoutId);
-        timeoutId = setTimeout(() => {
+        searchTimeoutId = setTimeout(() => {
             onSearchInput(event);
         }, 300);
     }

@@ -23,15 +23,11 @@
         text-align: center;
     }
 
-    strong {
-        font-weight: bold;
-    }
-
     .card {
         border: 1px solid;
         margin: 10px;
         padding: 10px;
-        border-radius: 5px;
+        border-radius: 18px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         display: flex;
         flex: 1 1 200px;
