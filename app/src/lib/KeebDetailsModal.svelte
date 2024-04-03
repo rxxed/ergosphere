@@ -40,10 +40,6 @@
         color: #4C58B3;
     }
 
-    strong {
-        font-weight: bold;
-    }
-
     .modal {
         position: fixed;
         top: 0;

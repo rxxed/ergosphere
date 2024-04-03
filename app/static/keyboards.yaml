@@ -34,7 +34,7 @@ keyboards:
     Is Handwired?: false
     Has Kit?: true
     Can Be Bought Prebuilt?: false
-    Profile: low
+    Profile: High
     Switch Type: MX
     Switch Spacing: MX
     Source Link: https://github.com/gtips/reviung/tree/master/reviung41
@@ -54,9 +54,9 @@ keyboards:
     Is Handwired?: false
     Has Kit?: true
     Can Be Bought Prebuilt?: false
-    Profile: low
+    Profile: Low
     Switch Type: Choc V1
-    Switch Spacing: choc
+    Switch Spacing: Choc
     Source Link: https://github.com/smores56/osprette
     Image URL: https://raw.githubusercontent.com/smores56/osprette/main/images/osprette-front.jpg
 
@@ -134,7 +134,7 @@ keyboards:
     Is Handwired?: false
     Has Kit?: true
     Can Be Bought Prebuilt?: false
-    Profile: High or Low
+    Profile: [High, Low]
     Switch Type: MX or Choc V1
     Switch Spacing: MX
     Source Link: https://github.com/MangoIV/dracuLad

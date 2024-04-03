@@ -5,10 +5,13 @@
     import KeebSearch from '../lib/KeebSearch.svelte';
     import KeebHeader from '../lib/KeebHeader.svelte';
     import KeebCard from '../lib/KeebCard.svelte';
-    import KeebModal from '../lib/KeebModal.svelte';
+    import KeebDetailsModal from '../lib/KeebDetailsModal.svelte';
+    import KeebFilterModal from '../lib/KeebFilterModal.svelte';
 
     let keyboards = [];
     let selectedKeyboard = null;
+    let selectedFilters = [];
+    let showFilterModal = false;
     $: filteredKeyboards = keyboards;
 
     onMount(async () => {
@@ -17,7 +20,6 @@
             const yamlData = await response.text();
             const data = yaml.load(yamlData);
             keyboards = data.keyboards;
-            console.log(keyboards);
         } catch (error) {
             console.error('Error loading YAML file:', error);
         }
@@ -27,26 +29,43 @@
         selectedKeyboard = keyboard;
     }
 
-    function handleModalClose() {
+    function handleDetailsModalClose() {
         selectedKeyboard = null;
     }
 
+    function handleFilterModalClose() {
+        showFilterModal = false;
+    }
+
     function handleSearchInputChange(event) {
-        console.log("on search: ", event.target.value);
         filteredKeyboards = filterKeyboardsBySearch(event.target.value);
-        console.log("filtered: ", filteredKeyboards);
-        console.log("keyboards: ", keyboards);
     }
 
     function filterKeyboardsBySearch(searchTerm) {
         return keyboards.filter(keeb => keeb['Keyboard Name'].toLowerCase().includes(searchTerm.toLowerCase()));
-        /*return Object.keys(keyboards).filter(key =>
-            keyboards[key]["Keyboard Name"].toLowerCase().includes(searchTerm.toLowerCase())
-        )*/
-        /*    .reduce((result, key) => {
-            result[key] = keyboards[key];
-            return result;
-        }, {});*/
+    }
+
+    function filterKeyboards() {
+        return keyboards.filter(keeb => {
+            for (const [filterKey, filterValue] of Object.entries(selectedFilters)) {
+                if (keeb.hasOwnProperty(filterKey)) {
+                    if (keeb[filterKey] !== filterValue)
+                        return false;
+                }
+            }
+            return true;
+        })
+    }
+
+    function handleFilterApplication(event) {
+        selectedFilters = event;
+        filteredKeyboards = filterKeyboards(selectedFilters);
+    }
+
+    /** Clear all filters, reset keyboard cards to pre-filter state */
+    function clearFilters() {
+        selectedFilters = {};
+        handleFilterApplication(selectedFilters);
     }
 </script>
 
@@ -58,6 +77,20 @@
     <KeebSearch numberOfKeyboards={keyboards.length} onSearchInput={handleSearchInputChange} />
 </div>
 
+<button class="advanced-filter" on:click={() => showFilterModal = true}>Advanced Filtering</button>
+{#if Object.keys(selectedFilters).length >= 1}
+    <button class="advanced-filter" on:click={clearFilters}>Clear Filters</button>
+{/if}
+
+{#if showFilterModal}
+    <KeebFilterModal
+        onClose={handleFilterModalClose}
+        onApplyFilters={handleFilterApplication}
+        selectedFilters={selectedFilters}
+        selectedFilterOptions={Object.keys(selectedFilters)}
+    />
+{/if}
+
 <div class="card-container">
 {#each filteredKeyboards as keyboard}
     <KeebCard {keyboard} onKeyboardClick={handleKeyboardClick} />
@@ -65,7 +98,7 @@
 </div>
 
 {#if selectedKeyboard}
-    <KeebModal {selectedKeyboard} onClose={handleModalClose} />
+    <KeebDetailsModal {selectedKeyboard} onClose={handleDetailsModalClose} />
 {/if}
 
 <style>
@@ -90,6 +123,18 @@
         justify-items: center;
         width: 70%;
         margin: auto;
+    }
+
+    .advanced-filter {
+        display: flex;
+        margin: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 8px;
+        background-color: inherit;
+        text-decoration: underline;
+        cursor: pointer;
+        border: none;
     }
 
     @media (max-width: 1200px) {
