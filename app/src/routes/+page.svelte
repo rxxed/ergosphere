@@ -135,6 +135,7 @@
         text-decoration: underline;
         cursor: pointer;
         border: none;
+        font-size: 1rem;
     }
 
     @media (max-width: 1200px) {

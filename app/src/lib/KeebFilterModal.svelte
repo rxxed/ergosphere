@@ -4,7 +4,6 @@
 
     export let onClose = () => {};
     export let onApplyFilters = () => {};
-    let keyboard = {'foo': 123, 'bar': 456};
 
     let filterOptions = [];
     export let selectedFilterOptions = [];
@@ -24,11 +23,12 @@
 
     /** Used to determine if we need to show a select dropdown or a number range as input */
     function hasNumericOptions(filterName) {
-        return false;
-        //return typeof filterOptions[filterName][0] === 'number';
+        return typeof filterOptions[filterName][0] === 'number';
     }
 
     function applyFilters() {
+        // Keep only the filters that are in the selectedFilterOptions array.  The line below will remove deselected filters.
+        Object.keys(selectedFilters).forEach(key => selectedFilterOptions.includes(key) || delete selectedFilters[key]);
         selectedFilterOptions.forEach(filterName => {
             const filterValue = document.querySelector(`select[name="selectedFilters-${filterName}"]`)?.value;
             if (filterValue === 'true' || filterValue === 'false')
@@ -53,13 +53,12 @@
                 {:else}
                 <select name={`selectedFilters-${filterName}`} id="selected-filters">
                     {#each filterOptions[filterName] as opt}
-                        <option value="{opt}">{opt}</option>
+                        <option value="{opt}" selected={selectedFilters[filterName] === opt}>{opt}</option>
                     {/each}
                 </select>
                 {/if}
                 </p>
             {/each}
-            <br />
             <button class="filter-apply-btn" on:click={applyFilters}>Apply Filters</button>
         {/if}
         <h2>Select options to filter</h2>
@@ -137,7 +136,16 @@
     }
 
     .filter-apply-btn {
-        text-align: center;
+        padding: 5px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-apply-btn:hover {
+        cursor: pointer;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
 
     @media (max-width: 700px) {
