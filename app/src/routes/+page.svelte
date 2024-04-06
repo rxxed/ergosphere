@@ -118,8 +118,8 @@
 
     .card-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
         justify-items: center;
         width: 70%;
         margin: auto;
@@ -140,13 +140,20 @@
 
     @media (max-width: 1200px) {
         .card-container {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            width: 100%;
         }
     }
 
     @media (max-width: 900px) {
         .card-container {
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 720px) {
+        .card-container {
+            grid-template-columns: repeat(2, 1fr);
             width: 100%;
         }
     }

@@ -19,7 +19,9 @@
         <div class="attribute-list">
             {#each Object.entries(keyboard) as attribute}
                 <div class="attribute-item">
-                    <strong>{attribute[0]}</strong> {attribute[1]}<br>
+                    <strong>{attribute[0]}</strong>
+                    <span class="attribute-divider"></span>
+                    <span>{attribute[1]}<br></span>
                 </div>
             {/each}
         </div>
@@ -73,6 +75,13 @@
     .attribute-item {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    .attribute-divider {
+        flex-grow: 1;
+        border-bottom: 1px solid #ccc;
+        margin: 5px;
     }
 
     .img-container {

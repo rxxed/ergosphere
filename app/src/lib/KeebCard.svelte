@@ -7,7 +7,7 @@
     }
 </script>
 
-<div class="card" on:click={handleClick}>
+<div class="card" on:click={handleClick} tabindex=0 role=button>
     <h3>{keyboard['Keyboard Name']}</h3>
     <img src={keyboard['Image URL']}>
     <div class="card-content">
