@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import yaml from 'js-yaml';
 
+    /** Event sent to close the modal. */
     export let onClose = () => {};
     export let onApplyFilters = () => {};
 
@@ -49,7 +50,21 @@
                 <p>
                 <label for={filterName}>{filterName}</label>
                 {#if hasNumericOptions(filterName)}
-                    <input type="number" /> <!--TODO-->
+                    <div class="range-input">
+                        <input
+                             type="number"
+                             name={`selectedFilters-${filterName}-min`}
+                             placeholder="Min"
+                             value={selectedFilters[filterName]?.min || ''}
+                        />
+                        <span>to</span>
+                        <input
+                             type="number"
+                             name={`selectedFilters-${filterName}`}
+                             placeholder="Max"
+                             value={selectedFilters[filterName]?.max || ''}
+                        />
+                    </div>
                 {:else}
                 <select name={`selectedFilters-${filterName}`} id="selected-filters">
                     {#each filterOptions[filterName] as opt}
@@ -123,6 +138,12 @@
 
     label:hover, input[type="checkbox"]:hover {
         cursor: pointer;
+    }
+
+    input[type="number"] {
+        margin-top: 5px;
+        padding: 5px;
+        font-size: 1rem;
     }
 
     .close-button {

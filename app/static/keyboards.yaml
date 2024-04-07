@@ -1,6 +1,7 @@
 keyboards:
 
   - Keyboard Name: Lily58
+    Route: lily58
     Number of Keys: [58]
     Is Split?: true
     Has Pinky Splay?: false
@@ -21,6 +22,7 @@ keyboards:
     Image URL: https://user-images.githubusercontent.com/6285554/84393842-13960900-ac37-11ea-811e-65db2948ca73.jpg
 
   - Keyboard Name: Reviung41
+    Route: reviung41
     Number of Keys: [41]
     Is Split?: false
     Has Pinky Splay?: false
@@ -41,6 +43,7 @@ keyboards:
     Image URL: https://raw.githubusercontent.com/gtips/reviung/master/reviung41/image/REVIUNG41B-1.jpg
 
   - Keyboard Name: Osprette
+    Route: osprette
     Number of Keys: [34]
     Is Split?: false
     Has Pinky Splay?: false
@@ -61,6 +64,7 @@ keyboards:
     Image URL: https://raw.githubusercontent.com/smores56/osprette/main/images/osprette-front.jpg
 
   - Keyboard Name: Dactyl Manuform
+    Route: dactyl-manuform
     Number of Keys: [40, 60]
     Is Split?: true
     Has Pinky Splay?: false
@@ -81,6 +85,7 @@ keyboards:
     Image URL: https://camo.githubusercontent.com/3d431aa11a1b1314f7ead63224cbc909bc4dff656a4a65ce7e30139bdeb144f1/687474703a2f2f692e696d6775722e636f6d2f4c646a456872522e6a7067
 
   - Keyboard Name: Corne
+    Route: corne
     Number of Keys: [42]
     Is Split?: true
     Has Pinky Splay?: false
@@ -101,6 +106,7 @@ keyboards:
     Image URL: https://github.com/foostan/crkbd/assets/736191/bc32e4e8-f737-4516-b92b-55a7cb93a336
 
   - Keyboard Name: Charybdis
+    Route: charybdis
     Number of Keys: [35, 56]
     Is Split?: true
     Has Pinky Splay?: false
@@ -121,6 +127,7 @@ keyboards:
     Image URL: https://raw.githubusercontent.com/Bastardkb/Charybdis/main/pics/1ae.jpg
 
   - Keyboard Name: Draculad
+    Route: draculad
     Number of Keys: [36]
     Is Split?: true
     Has Pinky Splay?: false

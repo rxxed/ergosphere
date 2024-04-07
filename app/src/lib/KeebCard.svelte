@@ -3,11 +3,11 @@
     export let onKeyboardClick = () => {};
 
     function handleClick() {
-        onKeyboardClick(keyboard);
+        window.location.href = `/board/${keyboard['Route']}`
     }
 </script>
 
-<div class="card" on:click={handleClick} tabindex=0 role=button>
+<div class="card" tabindex=0 role=button on:click={handleClick}>
     <h3>{keyboard['Keyboard Name']}</h3>
     <img src={keyboard['Image URL']}>
     <div class="card-content">
@@ -29,12 +29,12 @@
         padding: 10px;
         border-radius: 18px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex: 1 1 200px;
-        flex-direction: column;
         min-width: 150px;
         margin: 10px;
         max-width: 300px;
+        display: flex;
+        flex: 1 1 200px;
+        flex-direction: column;
     }
 
     .card:hover {
