@@ -22,7 +22,7 @@ labels:
 
 filter_options:
   # keyboard properties available for filtering
-  - number_of_keys: [0, 128]
+  - number_of_keys: 0
     is_split: [yes, no]
     has_pinky_splay: [yes, no]
     stagger: [column, row]

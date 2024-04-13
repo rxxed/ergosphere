@@ -9,15 +9,26 @@
     import KeebSearch from "../lib/KeebSearch.svelte";
     import KeebCard from "../lib/KeebCard.svelte";
     import KeebFilterModal from "../lib/KeebFilterModal.svelte";
+    import { filterStore } from './stores.js';
 
     /** Keyboard list fetched from the keyboards.yaml file. */
     let loadedKeyboards = [];
     let displayedKeyboards = [];
-    let filterOptions = [];
     let keyboardLabels = [];
-    let selectedFilters = [];
     let showFilterModal = false;
     let itemsPerPage = 12;
+
+    let filterOptions = [];
+    let selectedFilters = {};
+    filterStore.subscribe(value => {
+      filterOptions = value.filterOptions;
+      selectedFilters = value.selectedFilters;
+      // filter again with the selectedFilters from the store
+      displayedKeyboards = filterKeyboards(selectedFilters);
+    })
+    // update store when filters change
+    $: filterStore.set({ filterOptions, selectedFilters });
+
     /** URL param for current page indication */
     $: currentPage = parseInt($page.url.searchParams.get('page') || '1');
     $: paginatedKeyboards = displayedKeyboards.slice(
@@ -68,8 +79,6 @@
         const selectedFilterPairs = Object.entries(selectedFilters);
         return loadedKeyboards.filter((keeb) =>
             selectedFilterPairs.every(([filterKey, filterValue]) => {
-                console.log("keeb: ", keeb);
-                console.log("filterKey: ", filterKey);
                 switch (typeof filterValue) {
                     case "object": // if filtering a number range (TODO: find a better way to do this)
                         return keeb[filterKey].some((numKeys) =>
@@ -87,8 +96,6 @@
     }
 
     function isValueInRange(val, min, max) {
-        console.log("val min max", val, min, max);
-        console.log("inrange ", val >= min && val <= max);
         return val >= min && val <= max;
     }
 
@@ -125,11 +132,16 @@
     />
 </div>
 
-<button class="filter-button" on:click={() => (showFilterModal = true)}>
-    Advanced Filtering
-</button>
-{#if Object.keys(selectedFilters).length >= 1}
-    <button class="filter-button" on:click={clearFilters}>Clear Filters</button>
+<div class="filter-button-container">
+    <button class="filter-button" on:click={() => (showFilterModal = true)}>
+        Advanced Filtering
+    </button>
+</div>
+{#if selectedFilters && Object.keys(selectedFilters).length >= 1}
+    <div class="filter-button-container">
+        Showing {displayedKeyboards.length} keyboards.
+        <button class="filter-button" on:click={clearFilters}>Clear Filters</button>
+    </div>
 {/if}
 
 {#if showFilterModal}
@@ -139,7 +151,7 @@
         {selectedFilters}
         {filterOptions}
         {keyboardLabels}
-        selectedFilterOptions={Object.keys(selectedFilters)}
+        selectedFilterOptions={selectedFilters ? Object.keys(selectedFilters) : []}
     />
 {/if}
 
@@ -190,16 +202,18 @@
     }
 
     .filter-button {
-        display: flex;
-        margin: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 8px;
         background-color: inherit;
         text-decoration: underline;
         cursor: pointer;
         border: none;
         font-size: 1rem;
+    }
+
+    .filter-button-container {
+        display: flex;
+        margin: 10px;
+        padding: 8px;
+        justify-content: center;
     }
 
     .pagination {
