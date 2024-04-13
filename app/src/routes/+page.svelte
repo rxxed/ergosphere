@@ -139,7 +139,7 @@
 </div>
 {#if selectedFilters && Object.keys(selectedFilters).length >= 1}
     <div class="filter-button-container">
-        Showing {displayedKeyboards.length} keyboards.
+        Showing {displayedKeyboards.length} out of {loadedKeyboards.length} keyboards.
         <button class="filter-button" on:click={clearFilters}>Clear Filters</button>
     </div>
 {/if}
