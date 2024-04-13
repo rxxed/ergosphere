@@ -13,6 +13,7 @@ labels:
     is_handwired: Is Handwired?
     has_kit: Has Kit?
     has_encoder: Has Rotary Encoder?
+    is_unibody: Is Unibody?
     prebuilt: Can be bought prebuilt?
     profile: Profile
     switch_type: Switch Type
@@ -33,6 +34,7 @@ filter_options:
     has_trackball: [yes, no]
     is_handwired: [yes, no]
     has_kit: [yes, no]
+    is_unibody: [yes, no]
     has_encoder: [yes, no]
     prebuilt: [yes, no]
     profile: [High, Low]
@@ -55,6 +57,7 @@ keyboards:
     has_kit: yes
     prebuilt: yes
     has_encoder: no
+    is_unibody: no
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -76,6 +79,7 @@ keyboards:
     has_kit: yes
     prebuilt: no
     has_encoder: no
+    is_unibody: yes
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -97,6 +101,7 @@ keyboards:
     has_kit: yes
     prebuilt: no
     has_encoder: no
+    is_unibody: yes
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
@@ -118,6 +123,7 @@ keyboards:
     has_kit: no
     prebuilt: no
     has_encoder: no
+    is_unibody: no
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -139,6 +145,7 @@ keyboards:
     has_kit: no
     prebuilt: no
     has_encoder: no
+    is_unibody: no
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -160,6 +167,7 @@ keyboards:
     has_kit: yes
     prebuilt: no
     has_encoder: no
+    is_unibody: no
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -181,6 +189,7 @@ keyboards:
     has_kit: yes
     prebuilt: no
     has_encoder: yes
+    is_unibody: no
     profile: [High, Low]
     switch_type: [MX, Choc V1]
     switch_spacing: MX
@@ -202,6 +211,7 @@ keyboards:
     has_kit: yes
     prebuilt: no
     has_encoder: yes
+    is_unibody: no
     profile: [High, Low]
     switch_type: [MX, Choc V1]
     switch_spacing: MX
