@@ -1,105 +1,169 @@
 <script>
-    import { onMount } from 'svelte'
-    import yaml from 'js-yaml';
-    import '../styles/global.css';
-    import KeebSearch from '../lib/KeebSearch.svelte';
-    import KeebHeader from '../lib/KeebHeader.svelte';
-    import KeebCard from '../lib/KeebCard.svelte';
-    import KeebDetailsModal from '../lib/KeebDetailsModal.svelte';
-    import KeebFilterModal from '../lib/KeebFilterModal.svelte';
+    import { onMount } from "svelte";
+    import { page } from '$app/stores';
+    import { goto } from '$app/navigation';
+    import yaml from "js-yaml";
 
-    let keyboards = [];
-    let selectedKeyboard = null;
+    import "../styles/global.css";
+    import KeebHeader from "../lib/KeebHeader.svelte";
+    import KeebSearch from "../lib/KeebSearch.svelte";
+    import KeebCard from "../lib/KeebCard.svelte";
+    import KeebFilterModal from "../lib/KeebFilterModal.svelte";
+
+    /** Keyboard list fetched from the keyboards.yaml file. */
+    let loadedKeyboards = [];
+    let displayedKeyboards = [];
+    let filterOptions = [];
+    let keyboardLabels = [];
     let selectedFilters = [];
     let showFilterModal = false;
-    $: filteredKeyboards = keyboards;
+    let itemsPerPage = 12;
+    /** URL param for current page indication */
+    $: currentPage = parseInt($page.url.searchParams.get('page') || '1');
+    $: paginatedKeyboards = displayedKeyboards.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
     onMount(async () => {
         try {
-            const response = await fetch('/keyboards.yaml');
-            const yamlData = await response.text();
-            const data = yaml.load(yamlData);
-            keyboards = data.keyboards;
+            let response = await fetch("/keyboards.yaml");
+            let yamlData = await response.text();
+            let data = yaml.load(yamlData);
+            filterOptions = data.filter_options[0];
+            loadedKeyboards = data.keyboards;
+            displayedKeyboards = loadedKeyboards;
+            keyboardLabels = data.labels[0]
         } catch (error) {
-            console.error('Error loading YAML file:', error);
+            console.error("Error loading YAML file:", error);
         }
     });
 
-    function handleKeyboardClick(keyboard) {
-        selectedKeyboard = keyboard;
-    }
-
-    function handleDetailsModalClose() {
-        selectedKeyboard = null;
-    }
-
-    function handleFilterModalClose() {
+    function closeFilterModal() {
         showFilterModal = false;
     }
 
     function handleSearchInputChange(event) {
-        filteredKeyboards = filterKeyboardsBySearch(event.target.value);
+        const searchText = event.target.value;
+        displayedKeyboards = searchKeyboards(searchText);
     }
 
-    function filterKeyboardsBySearch(searchTerm) {
-        return keyboards.filter(keeb => keeb['Keyboard Name'].toLowerCase().includes(searchTerm.toLowerCase()));
+    /**
+     * Returns keyboards that have searchTerm as a substring of the keyboard name.
+     * @param searchTerm
+     */
+    function searchKeyboards(searchTerm) {
+        return loadedKeyboards.filter((keeb) =>
+            keeb.keyboard_name
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()),
+        );
     }
 
+    /**
+     * Returns what's left of the `loadedKeyboards` list after applying the filters in `selectedFilters`.
+     */
     function filterKeyboards() {
-        return keyboards.filter(keeb => {
-            for (const [filterKey, filterValue] of Object.entries(selectedFilters)) {
-                if (keeb.hasOwnProperty(filterKey)) {
-                    if (keeb[filterKey] !== filterValue)
-                        return false;
+        /** Array of arrays representing each selectedFilters' key-value pairs */
+        const selectedFilterPairs = Object.entries(selectedFilters);
+        return loadedKeyboards.filter((keeb) =>
+            selectedFilterPairs.every(([filterKey, filterValue]) => {
+                console.log("keeb: ", keeb);
+                console.log("filterKey: ", filterKey);
+                switch (typeof filterValue) {
+                    case "object": // if filtering a number range (TODO: find a better way to do this)
+                        return keeb[filterKey].some((numKeys) =>
+                            isValueInRange(
+                                numKeys,
+                                filterValue.min,
+                                filterValue.max,
+                            ),
+                        );
+                    default:
+                        return keeb[filterKey].includes(filterValue);
                 }
-            }
-            return true;
-        })
+            }),
+        );
     }
 
-    function handleFilterApplication(event) {
-        selectedFilters = event;
-        filteredKeyboards = filterKeyboards(selectedFilters);
+    function isValueInRange(val, min, max) {
+        console.log("val min max", val, min, max);
+        console.log("inrange ", val >= min && val <= max);
+        return val >= min && val <= max;
     }
 
-    /** Clear all filters, reset keyboard cards to pre-filter state */
+    /**
+     * Applies the given filters by updating selectedFilters and filtering the keyboard list.
+     * @param {object} newFilters - The new filter list to apply [{filter1: value1}, {filter2: value2}]
+     */
+    function applyFilters(newFilters) {
+        selectedFilters = newFilters;
+        displayedKeyboards = filterKeyboards(selectedFilters);
+        goBackToPage1();
+    }
+
+    /**
+     * Clear all filters, reset keyboard cards to pre-filter state.
+     */
     function clearFilters() {
-        selectedFilters = {};
-        handleFilterApplication(selectedFilters);
+        applyFilters({});
+    }
+
+    function goBackToPage1() {
+        goto('?page=1');
     }
 </script>
-
 
 <div class="header-container">
     <KeebHeader />
 </div>
+
 <div class="search-container">
-    <KeebSearch numberOfKeyboards={keyboards.length} onSearchInput={handleSearchInputChange} />
+    <KeebSearch
+        numberOfKeyboards={loadedKeyboards.length}
+        onSearchInput={handleSearchInputChange}
+    />
 </div>
 
-<button class="advanced-filter" on:click={() => showFilterModal = true}>Advanced Filtering</button>
+<button class="filter-button" on:click={() => (showFilterModal = true)}>
+    Advanced Filtering
+</button>
 {#if Object.keys(selectedFilters).length >= 1}
-    <button class="advanced-filter" on:click={clearFilters}>Clear Filters</button>
+    <button class="filter-button" on:click={clearFilters}>Clear Filters</button>
 {/if}
 
 {#if showFilterModal}
     <KeebFilterModal
-        onClose={handleFilterModalClose}
-        onApplyFilters={handleFilterApplication}
-        selectedFilters={selectedFilters}
+        onClose={closeFilterModal}
+        onApplyFilters={applyFilters}
+        {selectedFilters}
+        {filterOptions}
+        {keyboardLabels}
         selectedFilterOptions={Object.keys(selectedFilters)}
     />
 {/if}
 
-<div class="card-container">
-{#each filteredKeyboards as keyboard}
-    <KeebCard {keyboard} onKeyboardClick={handleKeyboardClick} />
-{/each}
+<div class="card-container" >
+    {#each paginatedKeyboards as keyboard}
+        <KeebCard {keyboard} />
+    {/each}
 </div>
 
-{#if selectedKeyboard}
-    <KeebDetailsModal {selectedKeyboard} onClose={handleDetailsModalClose} />
-{/if}
+<div class="pagination">
+    <a href="?page=1" class:disabled={currentPage === 1}>
+        &lt;&lt;
+    </a>
+    <a href="?page={currentPage - 1}" class:disabled={currentPage === 1}>
+        &lt;
+    </a>
+    <span>{currentPage} / {Math.ceil(displayedKeyboards.length / itemsPerPage)}</span>
+    <a href="?page={currentPage + 1}" class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage)}>
+        &gt;
+    </a>
+    <a href="?page={Math.ceil(displayedKeyboards.length / itemsPerPage)}" class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage)}>
+        &gt;&gt;
+    </a>
+</div>
 
 <style>
     .search-container {
@@ -125,7 +189,7 @@
         margin: auto;
     }
 
-    .advanced-filter {
+    .filter-button {
         display: flex;
         margin: 10px;
         margin-left: auto;
@@ -136,6 +200,36 @@
         cursor: pointer;
         border: none;
         font-size: 1rem;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .pagination a {
+        margin: 5px;
+        padding: 5px 10px;
+        background-color: #fefefe;
+        border: none;
+        cursor: pointer;
+        border: 1px solid #000;
+        border-radius: 10px;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .pagination a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .pagination .disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.5;
     }
 
     @media (max-width: 1200px) {

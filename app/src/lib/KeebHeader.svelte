@@ -1,14 +1,19 @@
-<h2><a href="/">ergoboards.org</a></h2>
+<div class="main-title"><a href="/">ergosphere</a></div>
 
 <style>
-    h2:hover {
+    .main-title {
+        font-size: 1.5rem;
+        margin: 20px;
+    }
+
+    .main-title:hover {
         cursor: pointer;
         text-decoration: underline;
         text-decoration-thickness: 2px;
     }
 
-    h2 a {
+    .main-title a {
         text-decoration: none;
-        color: inherit;
+        color: grey;
     }
 </style>

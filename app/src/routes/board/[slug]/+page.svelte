@@ -1,69 +1,68 @@
 <script>
-    import { onMount } from 'svelte';
-    import yaml from 'js-yaml';
-    import '../../../styles/global.css';
-    import KeebHeader from '../../../lib/KeebHeader.svelte';
+    import { onMount } from "svelte";
+    import yaml from "js-yaml";
+
+    import "../../../styles/global.css";
+    import KeebHeader from "../../../lib/KeebHeader.svelte";
 
     export let data;
+
     let keyboard = {};
-    let imageUrl = '';
-    let sourceLink = '';
+    let keyboardLabels = {};
+    let imageUrl = "";
+    let sourceLink = "";
 
     onMount(async () => {
         try {
-            const response = await fetch('/keyboards.yaml');
+            const response = await fetch("/keyboards.yaml");
             const yamlData = await response.text();
             const parsedData = yaml.load(yamlData);
-            console.log("slug: ", data.slug);
-            keyboard = parsedData.keyboards.find(kb => kb['Keyboard Name'] === data.slug);
-            keyboard = parsedData.keyboards.find(kb => kb['Route'] === data.slug);
+            keyboardLabels = parsedData.labels[0];
+            console.log(keyboardLabels);
+            keyboard = parsedData.keyboards.find(
+                (kb) => kb.route === data.slug,
+            );
             if (keyboard) {
-                imageUrl = keyboard['Image URL'];
-                sourceLink = keyboard['Source Link'];
+                imageUrl = keyboard.img_url;
+                sourceLink = keyboard.link;
                 // Don't display the following details
-                delete keyboard['Image URL'];
-                delete keyboard['Source Link'];
-                delete keyboard['Route'];
-                //({ 'Image URL': imageUrl, 'Source Link': sourceLink, ...keyboard } = keyboard);
+                delete keyboard.img_url;
+                delete keyboard.link;
+                delete keyboard.route;
             }
         } catch (error) {
-            console.error('Error loading YAML file:', error);
+            console.error("Error loading YAML file:", error);
         }
     });
-    //export let selectedKeyboard = {};
-    //delete selectedKeyboard.imgUrl;
-    //export let onClose = () => {};
-
-    //let { 'Image URL': imageUrl, 'Source Link': sourceLink, ...keyboard } = selectedKeyboard;
 </script>
 
 <div class="header-container">
     <KeebHeader />
 </div>
 
-{#if keyboard}
-    <!--<div class="modal" on:click|self={onClose}>-->
+{#if sourceLink}
     <div class="keeb-details">
-        <!--<button on:click={onClose} class="close-button">&times;</button>-->
         <div class="header-and-link">
-            <h2>{keyboard['Keyboard Name']}</h2>
+            <div class="keeb-title">{keyboard.keyboard_name}</div>
             <a href={sourceLink} class="sourcelink">Link to Source</a>
         </div>
         <div class="img-container">
-            <img src={imageUrl} />
+            <img src={imageUrl} alt="An image of {keyboard.keyboard_name}" />
         </div>
         <div class="attribute-list">
             {#each Object.entries(keyboard) as attribute}
                 <div class="attribute-item">
-                    <strong>{attribute[0]}</strong>
+                    <span>{keyboardLabels[attribute[0]]}</span>
                     <span class="attribute-divider"></span>
-                    <span>{attribute[1]}<br></span>
+                    <span>{attribute[1]}<br /></span>
                 </div>
             {/each}
         </div>
     </div>
 {:else}
-    <p>Loading keyboard details...</p>
+    <p style="text-align: center; margin-top: 10px;">
+        Loading keyboard details...
+    </p>
 {/if}
 
 <style>
@@ -72,27 +71,36 @@
     }
 
     .sourcelink {
-        color: #0076C1;
+        color: #0076c1;
         transition: color 0.3s;
     }
 
     .sourcelink:hover {
-        color: #4C58B3;
+        color: #4c58b3;
     }
 
     .keeb-details {
         margin: auto;
-        max-width: 60%;
+        max-width: 70%;
         width: 100%;
         height: 100%;
+        margin-bottom: 10px;
         overflow-y: auto;
         position: relative;
+        border-radius: 18px;
+    }
+
+    .keeb-title {
+        text-align: center;
+        margin: 10px;
+        font-size: 1.25rem;
     }
 
     .attribute-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+        padding: 20px;
     }
 
     .attribute-item {
@@ -117,22 +125,14 @@
         margin: auto;
         max-width: 500px;
         max-height: auto;
-    }
-
-    .close-button {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 40px;
-        background: none;
-        border: none;
-        cursor: pointer;
+        background-color: #fefefe !important;
+        border: 1px solid #000;
+        border-radius: 18px;
     }
 
     @media (max-width: 700px) {
         .attribute-list {
             grid-template-columns: 1fr;
-            padding: 0 80px;
         }
 
         .img-container img {
@@ -163,11 +163,6 @@
 
         .attribute-list {
             grid-template-columns: 1fr;
-            padding: 0;
-        }
-
-        .close-button {
-            top: 20px;
         }
     }
 </style>

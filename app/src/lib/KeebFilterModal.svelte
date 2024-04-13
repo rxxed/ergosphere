@@ -1,80 +1,107 @@
 <script>
-    import { onMount } from 'svelte';
-    import yaml from 'js-yaml';
-
     /** Event sent to close the modal. */
     export let onClose = () => {};
     export let onApplyFilters = () => {};
 
-    let filterOptions = [];
+    /** List of all possible filter options */
+    export let filterOptions = [];
+    export let keyboardLabels = [];
     export let selectedFilterOptions = [];
     export let selectedFilters = {};
 
-
-    onMount(async () => {
-        try {
-            const response = await fetch('/dataModel.yaml');
-            const yamlData = await response.text();
-            const data = yaml.load(yamlData);
-            filterOptions = data['Filter Options'][0];
-        } catch (error) {
-            console.error('Error loading YAML file:', error);
-        }
-    });
-
-    /** Used to determine if we need to show a select dropdown or a number range as input */
+    /**
+     * Used to determine if we need to show a select dropdown or a number range as input
+     * @param filterName
+     */
     function hasNumericOptions(filterName) {
-        return typeof filterOptions[filterName][0] === 'number';
+        return typeof filterOptions[filterName][0] === "number";
     }
 
     function applyFilters() {
-        // Keep only the filters that are in the selectedFilterOptions array.  The line below will remove deselected filters.
-        Object.keys(selectedFilters).forEach(key => selectedFilterOptions.includes(key) || delete selectedFilters[key]);
-        selectedFilterOptions.forEach(filterName => {
-            const filterValue = document.querySelector(`select[name="selectedFilters-${filterName}"]`)?.value;
-            if (filterValue === 'true' || filterValue === 'false')
-                selectedFilters[filterName] = filterValue === 'true'; // convert filterValue to boolean
-            else
+        removeDeselectedFiltersIfAny();
+        selectedFilterOptions.forEach((filterName) => {
+            if (hasNumericOptions(filterName)) {
+                const min = document.querySelector(
+                    `input[name="selectedFilters-${filterName}-min"]`,
+                )?.value;
+                const max = document.querySelector(
+                    `input[name="selectedFilters-${filterName}-max"]`,
+                )?.value;
+
+                selectedFilters[filterName] = {
+                    min: min ? parseInt(min, 10) : undefined,
+                    max: max ? parseInt(max, 10) : undefined,
+                };
+            } else {
+                const filterValue = document.querySelector(
+                    `select[name="selectedFilters-${filterName}"]`,
+                )?.value;
                 selectedFilters[filterName] = filterValue;
-        })
+            }
+        });
         onApplyFilters(selectedFilters);
         onClose();
     }
+
+    /**
+     * Keep only the filters that are in the `selectedFilterOptions` array.
+     * This function will remove deselected filters if there are any.
+     */
+    function removeDeselectedFiltersIfAny() {
+        Object.keys(selectedFilters).forEach(
+            (key) =>
+                selectedFilterOptions.includes(key) ||
+                delete selectedFilters[key],
+        );
+    }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="modal" on:click|self={onClose}>
     <div class="modal-content">
-        {#if selectedFilterOptions.length >= 1 && Object.keys(filterOptions).length >= 1 }
-            <h2>Select values</h2>
+        {#if selectedFilterOptions.length >= 1}
+            <h2>Choose filter values</h2>
             {#each selectedFilterOptions as filterName}
                 <p>
-                <label for={filterName}>{filterName}</label>
-                {#if hasNumericOptions(filterName)}
-                    <div class="range-input">
-                        <input
-                             type="number"
-                             name={`selectedFilters-${filterName}-min`}
-                             placeholder="Min"
-                             value={selectedFilters[filterName]?.min || ''}
-                        />
-                        <span>to</span>
-                        <input
-                             type="number"
-                             name={`selectedFilters-${filterName}`}
-                             placeholder="Max"
-                             value={selectedFilters[filterName]?.max || ''}
-                        />
-                    </div>
-                {:else}
-                <select name={`selectedFilters-${filterName}`} id="selected-filters">
-                    {#each filterOptions[filterName] as opt}
-                        <option value="{opt}" selected={selectedFilters[filterName] === opt}>{opt}</option>
-                    {/each}
-                </select>
-                {/if}
+                    <label for={filterName}>{keyboardLabels[filterName]}</label>
+                    {#if hasNumericOptions(filterName)}
+                        <div class="range-input">
+                            <input
+                                type="number"
+                                name={`selectedFilters-${filterName}-min`}
+                                placeholder="Min"
+                                value={selectedFilters[filterName]?.min || ""}
+                            />
+                            <span>to</span>
+                            <input
+                                type="number"
+                                name={`selectedFilters-${filterName}-max`}
+                                placeholder="Max"
+                                value={selectedFilters[filterName]?.max || ""}
+                            />
+                        </div>
+                    {:else}
+                        <select
+                            name={`selectedFilters-${filterName}`}
+                            id="selected-filters"
+                        >
+                            {#each filterOptions[filterName] as opt}
+                                <option
+                                    value={opt}
+                                    selected={selectedFilters[filterName] ===
+                                        opt}
+                                >
+                                    {opt}
+                                </option>
+                            {/each}
+                        </select>
+                    {/if}
                 </p>
             {/each}
-            <button class="filter-apply-btn" on:click={applyFilters}>Apply Filters</button>
+            <button class="filter-apply-btn" on:click={applyFilters}>
+                Apply Filters
+            </button>
         {/if}
         <h2>Select options to filter</h2>
         <button on:click={onClose} class="close-button">&times;</button>
@@ -82,8 +109,13 @@
             {#each Object.entries(filterOptions) as attribute}
                 <div class="attribute-item">
                     <label>
-                        <input type=checkbox name={attribute[0]} value={attribute[0]} bind:group={selectedFilterOptions} />
-                        {attribute[0]}<br>
+                        <input
+                            type="checkbox"
+                            name={attribute[0]}
+                            value={attribute[0]}
+                            bind:group={selectedFilterOptions}
+                        />
+                        {keyboardLabels[attribute[0]]}<br />
                     </label>
                 </div>
             {/each}
@@ -92,6 +124,10 @@
 </div>
 
 <style>
+    h2 {
+        font-weight: lighter;
+    }
+
     .modal {
         position: fixed;
         top: 0;
@@ -107,13 +143,13 @@
 
     .modal-content {
         padding: 20px;
-        border-radius: 5px;
         max-width: 800px;
         width: 70%;
         height: 70%;
         overflow-y: auto;
         position: relative;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 18px;
+        background-color: #FEFEFE !important;
     }
 
     .attribute-list {
@@ -136,7 +172,8 @@
         padding: 5px;
     }
 
-    label:hover, input[type="checkbox"]:hover {
+    label:hover,
+    input[type="checkbox"]:hover {
         cursor: pointer;
     }
 
@@ -162,6 +199,7 @@
         border-radius: 5px;
         border: 1px solid;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: inherit
     }
 
     .filter-apply-btn:hover {
@@ -173,10 +211,6 @@
         .attribute-list {
             grid-template-columns: 1fr;
             padding: 0 80px;
-        }
-
-        .img-container img {
-            max-width: 80%;
         }
     }
 

@@ -1,148 +1,209 @@
+labels:
+  - keyboard_name: Keyboard Name
+    route: Route
+    number_of_keys: Number of Keys
+    is_split: Is Split?
+    has_pinky_splay: Has Pinky Splay?
+    stagger: Stagger
+    is_parameterized: Is Parameterized?
+    is_concave: Is Concave?
+    is_open_source: Is Open Source?
+    has_pcb: Has PCB?
+    has_trackball: Has Trackball?
+    is_handwired: Is Handwired?
+    has_kit: Has Kit?
+    has_encoder: Has Rotary Encoder?
+    prebuilt: Can be bought prebuilt?
+    profile: Profile
+    switch_type: Switch Type
+    switch_spacing: Switch Spacing
+    link: Source Link
+    img_url: Image URL
+
+filter_options:
+  # keyboard properties available for filtering
+  - number_of_keys: [0, 128]
+    is_split: [yes, no]
+    has_pinky_splay: [yes, no]
+    stagger: [column, row]
+    is_parameterized: [yes, no]
+    is_concave: [yes, no]
+    is_open_source: [yes, no]
+    has_pcb: [yes, no]
+    has_trackball: [yes, no]
+    is_handwired: [yes, no]
+    has_kit: [yes, no]
+    has_encoder: [yes, no]
+    prebuilt: [yes, no]
+    profile: [High, Low]
+    switch_type: [MX, Choc V1, Choc V2]
+    switch_spacing: [MX, Choc]
+
 keyboards:
+  - keyboard_name: Lily58
+    route: lily58
+    number_of_keys: [58]
+    is_split: yes
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: yes
+    prebuilt: yes
+    has_encoder: no
+    profile: High
+    switch_type: MX
+    switch_spacing: MX
+    link: https://github.com/kata0510/Lily58
+    img_url: https://user-images.githubusercontent.com/6285554/84393842-13960900-ac37-11ea-811e-65db2948ca73.jpg
 
-  - Keyboard Name: Lily58
-    Route: lily58
-    Number of Keys: [58]
-    Is Split?: true
-    Has Pinky Splay?: false
-    Stagger: column
-    Is Ortholinear?: false
-    Is Parametric?: false
-    Is Concave?: false
-    Is Open Source?: true
-    Has PCB?: true
-    Has Trackball?: false
-    Is Handwired?: false
-    Has Kit?: true
-    Can Be Bought Prebuilt?: true
-    Profile: High
-    Switch Type: MX
-    Switch Spacing: MX
-    Source Link: https://github.com/kata0510/Lily58
-    Image URL: https://user-images.githubusercontent.com/6285554/84393842-13960900-ac37-11ea-811e-65db2948ca73.jpg
+  - keyboard_name: Reviung41
+    route: reviung41
+    number_of_keys: [41]
+    is_split: no
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: yes
+    prebuilt: no
+    has_encoder: no
+    profile: High
+    switch_type: MX
+    switch_spacing: MX
+    link: https://github.com/gtips/reviung/tree/master/reviung41
+    img_url: https://raw.githubusercontent.com/gtips/reviung/master/reviung41/image/REVIUNG41B-1.jpg
 
-  - Keyboard Name: Reviung41
-    Route: reviung41
-    Number of Keys: [41]
-    Is Split?: false
-    Has Pinky Splay?: false
-    Stagger: column
-    Is Ortholinear?: false
-    Is Parametric?: false
-    Is Concave?: false
-    Is Open Source?: true
-    Has PCB?: true
-    Has Trackball?: false
-    Is Handwired?: false
-    Has Kit?: true
-    Can Be Bought Prebuilt?: false
-    Profile: High
-    Switch Type: MX
-    Switch Spacing: MX
-    Source Link: https://github.com/gtips/reviung/tree/master/reviung41
-    Image URL: https://raw.githubusercontent.com/gtips/reviung/master/reviung41/image/REVIUNG41B-1.jpg
+  - keyboard_name: Osprette
+    route: osprette
+    number_of_keys: [34]
+    is_split: no
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: yes
+    prebuilt: no
+    has_encoder: no
+    profile: Low
+    switch_type: Choc V1
+    switch_spacing: Choc
+    link: https://github.com/smores56/osprette
+    img_url: https://raw.githubusercontent.com/smores56/osprette/main/images/osprette-front.jpg
 
-  - Keyboard Name: Osprette
-    Route: osprette
-    Number of Keys: [34]
-    Is Split?: false
-    Has Pinky Splay?: false
-    Stagger: column
-    Is Ortholinear?: false
-    Is Parametric?: false
-    Is Concave?: false
-    Is Open Source?: true
-    Has PCB?: true
-    Has Trackball?: false
-    Is Handwired?: false
-    Has Kit?: true
-    Can Be Bought Prebuilt?: false
-    Profile: Low
-    Switch Type: Choc V1
-    Switch Spacing: Choc
-    Source Link: https://github.com/smores56/osprette
-    Image URL: https://raw.githubusercontent.com/smores56/osprette/main/images/osprette-front.jpg
+  - keyboard_name: Dactyl Manuform
+    route: dactyl-manuform
+    number_of_keys: [40, 60]
+    is_split: yes
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: yes
+    is_concave: yes
+    is_open_source: yes
+    has_pcb: no
+    has_trackball: no
+    is_handwired: yes
+    has_kit: no
+    prebuilt: no
+    has_encoder: no
+    profile: High
+    switch_type: MX
+    switch_spacing: MX
+    link: https://github.com/abstracthat/dactyl-manuform
+    img_url: https://camo.githubusercontent.com/3d431aa11a1b1314f7ead63224cbc909bc4dff656a4a65ce7e30139bdeb144f1/687474703a2f2f692e696d6775722e636f6d2f4c646a456872522e6a7067
 
-  - Keyboard Name: Dactyl Manuform
-    Route: dactyl-manuform
-    Number of Keys: [40, 60]
-    Is Split?: true
-    Has Pinky Splay?: false
-    Stagger: column
-    Is Ortholinear?: false
-    Is Parametric?: true
-    Is Concave?: true
-    Is Open Source?: true
-    Has PCB?: false
-    Has Trackball?: false
-    Is Handwired?: true
-    Has Kit?: false
-    Can Be Bought Prebuilt?: false
-    Profile: High
-    Switch Type: MX
-    Switch Spacing: MX
-    Source Link: https://github.com/abstracthat/dactyl-manuform
-    Image URL: https://camo.githubusercontent.com/3d431aa11a1b1314f7ead63224cbc909bc4dff656a4a65ce7e30139bdeb144f1/687474703a2f2f692e696d6775722e636f6d2f4c646a456872522e6a7067
+  - keyboard_name: Corne
+    route: corne
+    number_of_keys: [42]
+    is_split: yes
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: no
+    prebuilt: no
+    has_encoder: no
+    profile: High
+    switch_type: MX
+    switch_spacing: MX
+    link: https://github.com/foostan/crkbd
+    img_url: https://github.com/foostan/crkbd/assets/736191/bc32e4e8-f737-4516-b92b-55a7cb93a336
 
-  - Keyboard Name: Corne
-    Route: corne
-    Number of Keys: [42]
-    Is Split?: true
-    Has Pinky Splay?: false
-    Stagger: column
-    Is Ortholinear?: false
-    Is Parametric?: false
-    Is Concave?: false
-    Is Open Source?: true
-    Has PCB?: true
-    Has Trackball?: false
-    Is Handwired?: false
-    Has Kit?: false
-    Can Be Bought Prebuilt?: false
-    Profile: High
-    Switch Type: MX
-    Switch Spacing: MX
-    Source Link: https://github.com/foostan/crkbd
-    Image URL: https://github.com/foostan/crkbd/assets/736191/bc32e4e8-f737-4516-b92b-55a7cb93a336
+  - keyboard_name: Charybdis
+    route: charybdis
+    number_of_keys: [35, 56]
+    is_split: yes
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: no
+    is_concave: yes
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: yes
+    is_handwired: yes
+    has_kit: yes
+    prebuilt: no
+    has_encoder: no
+    profile: High
+    switch_type: MX
+    switch_spacing: MX
+    link: https://github.com/Bastardkb/Charybdis
+    img_url: https://raw.githubusercontent.com/Bastardkb/Charybdis/main/pics/1ae.jpg
 
-  - Keyboard Name: Charybdis
-    Route: charybdis
-    Number of Keys: [35, 56]
-    Is Split?: true
-    Has Pinky Splay?: false
-    Stagger: column
-    Is Ortholinear?: false
-    Is Parametric?: false
-    Is Concave?: true
-    Is Open Source?: true
-    Has PCB?: true
-    Has Trackball?: true
-    Is Handwired?: true
-    Has Kit?: true
-    Can Be Bought Prebuilt?: true
-    Profile: High
-    Switch Type: MX
-    Switch Spacing: MX
-    Source Link: https://github.com/Bastardkb/Charybdis
-    Image URL: https://raw.githubusercontent.com/Bastardkb/Charybdis/main/pics/1ae.jpg
+  - keyboard_name: Draculad
+    route: draculad
+    number_of_keys: [36]
+    is_split: yes
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: yes
+    is_handwired: no
+    has_kit: yes
+    prebuilt: no
+    has_encoder: yes
+    profile: [High, Low]
+    switch_type: [MX, Choc V1]
+    switch_spacing: MX
+    link: https://github.com/MangoIV/dracuLad
+    img_url: https://raw.githubusercontent.com/mangoiv/draculad/master/pictures/rev1/both_sides_underglow_oleds.jpg
 
-  - Keyboard Name: Draculad
-    Route: draculad
-    Number of Keys: [36]
-    Is Split?: true
-    Has Pinky Splay?: false
-    Stagger: column
-    Is Ortholinear?: false
-    Is Parametric?: false
-    Is Concave?: false
-    Is Open Source?: true
-    Has PCB?: true
-    Has Trackball?: true
-    Is Handwired?: false
-    Has Kit?: true
-    Can Be Bought Prebuilt?: false
-    Profile: [High, Low]
-    Switch Type: MX or Choc V1
-    Switch Spacing: MX
-    Source Link: https://github.com/MangoIV/dracuLad
-    Image URL: https://raw.githubusercontent.com/mangoiv/draculad/master/pictures/rev1/both_sides_underglow_oleds.jpg
+  - keyboard_name: Kyria
+    route: kyria
+    number_of_keys: [50]
+    is_split: yes
+    has_pinky_splay: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: no
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: yes
+    prebuilt: no
+    has_encoder: yes
+    profile: [High, Low]
+    switch_type: [MX, Choc V1]
+    switch_spacing: MX
+    link: https://splitkb.com/collections/keyboard-kits/products/kyria-rev3
+    img_url: https://splitkb.com/cdn/shop/products/SKB-KYR-B__-030-hero-alt_696x464.jpg?v=1673218766
