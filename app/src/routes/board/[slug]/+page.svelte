@@ -14,11 +14,9 @@
 
     onMount(async () => {
         try {
-            const response = await fetch("/keyboards.yaml");
-            const yamlData = await response.text();
-            const parsedData = yaml.load(yamlData);
-            keyboardLabels = parsedData.labels[0];
-            console.log(keyboardLabels);
+            let response = await fetch("/keyboards.yaml");
+            let yamlData = await response.text();
+            let parsedData = yaml.load(yamlData);
             keyboard = parsedData.keyboards.find(
                 (kb) => kb.route === data.slug,
             );
@@ -30,6 +28,12 @@
                 delete keyboard.link;
                 delete keyboard.route;
             }
+
+            response = await fetch("/datamodel.yaml");
+            yamlData = await response.text();
+            parsedData = yaml.load(yamlData);
+            keyboardLabels = parsedData.labels[0];
+            console.log(keyboardLabels);
         } catch (error) {
             console.error("Error loading YAML file:", error);
         }
@@ -81,7 +85,7 @@
 
     .keeb-details {
         margin: auto;
-        max-width: 70%;
+        max-width: 60%;
         width: 100%;
         height: 100%;
         margin-bottom: 10px;
@@ -130,6 +134,26 @@
         border-radius: 18px;
     }
 
+    .header-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (max-width: 1200px) {
+        .keeb-details {
+            max-width: 70%;
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1092px) {
+        .keeb-details {
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+
     @media (max-width: 700px) {
         .attribute-list {
             grid-template-columns: 1fr;
@@ -137,19 +161,6 @@
 
         .img-container img {
             max-width: 80%;
-        }
-    }
-
-    .header-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    @media (max-width: 1092px) {
-        .keeb-details {
-            max-width: 100%;
-            width: 100%;
         }
     }
 

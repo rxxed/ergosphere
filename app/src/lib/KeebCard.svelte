@@ -58,6 +58,7 @@
     align-items: center;
     margin-bottom: 10px;
     height: 100%;
+    min-height: 200px;
   }
 
   .card-content {

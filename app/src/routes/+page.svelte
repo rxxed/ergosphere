@@ -20,12 +20,7 @@
 
     let filterOptions = [];
     let selectedFilters = {};
-    filterStore.subscribe(value => {
-      filterOptions = value.filterOptions;
-      selectedFilters = value.selectedFilters;
-      // filter again with the selectedFilters from the store
-      displayedKeyboards = filterKeyboards(selectedFilters);
-    })
+
     // update store when filters change
     $: filterStore.set({ filterOptions, selectedFilters });
 
@@ -38,12 +33,23 @@
 
     onMount(async () => {
         try {
+            filterStore.subscribe(value => {
+                filterOptions = value.filterOptions;
+                selectedFilters = value.selectedFilters;
+                // filter again with the selectedFilters from the store
+                displayedKeyboards = filterKeyboards(selectedFilters);
+            })
+
             let response = await fetch("/keyboards.yaml");
             let yamlData = await response.text();
             let data = yaml.load(yamlData);
-            filterOptions = data.filter_options[0];
             loadedKeyboards = data.keyboards;
             displayedKeyboards = loadedKeyboards;
+
+            response = await fetch("/datamodel.yaml");
+            yamlData = await response.text();
+            data = yaml.load(yamlData);
+            filterOptions = data.filter_options[0];
             keyboardLabels = data.labels[0]
         } catch (error) {
             console.error("Error loading YAML file:", error);
@@ -79,18 +85,19 @@
         const selectedFilterPairs = Object.entries(selectedFilters);
         return loadedKeyboards.filter((keeb) =>
             selectedFilterPairs.every(([filterKey, filterValue]) => {
-                switch (typeof filterValue) {
-                    case "object": // if filtering a number range (TODO: find a better way to do this)
-                        return keeb[filterKey].some((numKeys) =>
-                            isValueInRange(
-                                numKeys,
-                                filterValue.min,
-                                filterValue.max,
-                            ),
-                        );
-                    default:
-                        return keeb[filterKey].includes(filterValue);
-                }
+              switch (filterValue.type) {
+              case "range":
+                return keeb[filterKey].some((numKeys) =>
+                  isValueInRange(numKeys, filterValue.min, filterValue.max)
+                );
+                break;
+              case "singleselect":
+                return keeb[filterKey].includes(filterValue.value);
+                break;
+              case "multiselect":
+                return filterValue.values.some(val => keeb[filterKey].includes(val))
+                break;
+              }
             }),
         );
     }
@@ -134,7 +141,7 @@
 
 <div class="filter-button-container">
     <button class="filter-button" on:click={() => (showFilterModal = true)}>
-        Advanced Filtering
+        Click here to filter
     </button>
 </div>
 {#if selectedFilters && Object.keys(selectedFilters).length >= 1}
@@ -146,7 +153,7 @@
 
 {#if showFilterModal}
     <KeebFilterModal
-        onClose={closeFilterModal}
+        sendCloseModalEvent={closeFilterModal}
         onApplyFilters={applyFilters}
         {selectedFilters}
         {filterOptions}

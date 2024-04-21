@@ -1,53 +1,3 @@
-labels:
-  - keyboard_name: Keyboard Name
-    route: Route
-    by: Designed/Manufactured by
-    number_of_keys: Number of Keys
-    is_split: Is Split?
-    has_pinky_splay: Has Pinky Splay?
-    has_pinky_cluster: Has Pinky Cluster?
-    stagger: Stagger
-    is_parameterized: Is Parameterized?
-    is_concave: Is Concave?
-    is_open_source: Is Open Source?
-    has_pcb: Has PCB?
-    has_trackball: Has Trackball?
-    is_handwired: Is Handwired?
-    has_kit: Has Kit?
-    has_encoder: Has Rotary Encoder?
-    is_unibody: Is Unibody?
-    has_hotswap: Has Hotswap PCB?
-    daughterboard: Daughterboard
-    prebuilt: Can be bought pre-assembled?
-    profile: Profile
-    switch_type: Switch Type
-    switch_spacing: Switch Spacing
-    link: Source Link
-    img_url: Image URL
-
-filter_options:
-  # keyboard properties available for filtering
-  - number_of_keys: 0
-    is_split: [yes, no]
-    has_pinky_splay: [yes, no]
-    has_pinky_cluster: [yes, no]
-    stagger: [column, row]
-    is_parameterized: [yes, no]
-    is_concave: [yes, no]
-    is_open_source: [yes, no]
-    has_pcb: [yes, no]
-    has_trackball: [yes, no]
-    is_handwired: [yes, no]
-    has_kit: [yes, no]
-    is_unibody: [yes, no]
-    has_hotswap: [yes, no]
-    daughterboard: [Pro Micro, XIAO, Integrated, MS88SF2]
-    has_encoder: [yes, no]
-    prebuilt: [yes, no]
-    profile: [High, Low]
-    switch_type: [MX, Choc V1, Choc V2]
-    switch_spacing: [MX, Choc]
-
 keyboards:
   - keyboard_name: Hummingbird
     route: hummingbird
@@ -68,7 +18,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: XIAO
+    mcu_footprint: XIAO
     profile: low
     switch_type: Choc V1
     switch_spacing: Choc
@@ -94,7 +44,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: [Low, High]
     switch_type: [Choc V1, MX]
     switch_spacing: [Choc, MX]
@@ -120,7 +70,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
@@ -146,7 +96,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
@@ -172,7 +122,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: MS88SF2
+    mcu_footprint: MS88SF2
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
@@ -198,7 +148,7 @@ keyboards:
     has_encoder: yes
     is_unibody: yes
     has_hotswap: no
-    daughterboard: Integrated
+    mcu_footprint: Onboard MCU
     profile: [Low, High]
     switch_type: [MX, Choc V1, Choc V2]
     switch_spacing: MX
@@ -224,7 +174,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: [Low, High]
     switch_type: [MX, Choc V1, Choc V2]
     switch_spacing: MX
@@ -250,7 +200,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: yes
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
@@ -276,7 +226,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -302,7 +252,7 @@ keyboards:
     has_encoder: yes
     is_unibody: yes
     has_hotswap: [yes, no]
-    daughterboard: Integrated
+    mcu_footprint: Onboard MCU
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -328,7 +278,7 @@ keyboards:
     has_encoder: no
     is_unibody: no
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -354,7 +304,7 @@ keyboards:
     has_encoder: no
     is_unibody: no
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -380,7 +330,7 @@ keyboards:
     has_encoder: no
     is_unibody: yes
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -406,7 +356,7 @@ keyboards:
     has_encoder: no
     is_unibody: no
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: High
     switch_type: MX
     switch_spacing: MX
@@ -432,7 +382,7 @@ keyboards:
     has_encoder: yes
     is_unibody: no
     has_hotswap: no
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: [High, Low]
     switch_type: [MX, Choc V1]
     switch_spacing: MX
@@ -458,7 +408,7 @@ keyboards:
     has_encoder: yes
     is_unibody: no
     has_hotswap: [no, yes]
-    daughterboard: Pro Micro
+    mcu_footprint: Pro Micro
     profile: [High, Low]
     switch_type: [MX, Choc V1]
     switch_spacing: MX

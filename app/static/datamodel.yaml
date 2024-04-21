@@ -1,0 +1,110 @@
+labels:
+  - keyboard_name: Keyboard Name
+    route: Route
+    by: Designed/Manufactured by
+    number_of_keys: Number of Keys
+    is_split: Is Split?
+    has_pinky_splay: Has Pinky Splay?
+    has_pinky_cluster: Has Pinky Cluster?
+    stagger: Stagger
+    is_parameterized: Is Parameterized?
+    is_concave: Is Concave?
+    is_open_source: Is Open Source?
+    has_pcb: Has PCB?
+    has_trackball: Has Trackball?
+    is_handwired: Is Handwired?
+    has_kit: Has Kit?
+    has_encoder: Has Rotary Encoder?
+    is_unibody: Is Unibody?
+    has_hotswap: Has Hotswap Sockets?
+    mcu_footprint: MCU Footprint
+    wireless: Wireless? # TODO
+    prebuilt: Can be bought pre-assembled?
+    profile: Profile
+    switch_type: Switch Type
+    switch_spacing: Switch Spacing
+    display_type: Display Type # TODO
+    has_tenting: Has Tenting? # TODO
+    firmware: Firmware # TODO
+    link: Source Link
+    img_url: Image URL
+
+filter_options:
+  # keyboard properties available for filtering
+  #
+  # types:
+  # range - for a numeric range
+  # singleselect - can only select one of the given options
+  # multiselect - can select any number of the given options
+  - number_of_keys:
+      type: range
+      value: 0 # TODO
+    is_split:
+      type: singleselect
+      value: [yes, no]
+    has_pinky_splay:
+      type: singleselect
+      value: [yes, no]
+    has_pinky_cluster:
+      type: singleselect
+      value: [yes, no]
+    stagger:
+      type: multiselect
+      value: [column, row, none]
+    is_parameterized:
+      type: singleselect
+      value: [yes, no]
+    is_concave:
+      type: singleselect
+      value: [yes, no]
+    is_open_source:
+      type: singleselect
+      value: [yes, no]
+    has_pcb:
+      type: singleselect
+      value: [yes, no]
+    has_trackball:
+      type: singleselect
+      value: [yes, no]
+    is_handwired:
+      type: singleselect
+      value: [yes, no]
+    has_kit:
+      type: singleselect
+      value: [yes, no]
+    is_unibody:
+      type: singleselect
+      value: [yes, no]
+    has_hotswap:
+      type: singleselect
+      value: [yes, no]
+    mcu_footprint:
+      type: multiselect
+      value: [Pro Micro, XIAO, Onboard MCU, MS88SF2]
+    wireless:
+      type: singleselect
+      value: [yes, no]
+    has_encoder:
+      type: singleselect
+      value: [yes, no]
+    prebuilt:
+      type: singleselect
+      value: [yes, no]
+    profile:
+      type: singleselect
+      value: [High, Low]
+    switch_type:
+      type: multiselect
+      value: [MX, Choc V1, Choc V2]
+    switch_spacing:
+      type: multiselect
+      value: [MX, Choc]
+    display_type:
+      type: multiselect
+      value: [None, OLED, E-paper]
+    has_tenting:
+      type: singleselect
+      value: [yes, no]
+    firmware:
+      type: multiselect
+      value: [QMK, ZMK]

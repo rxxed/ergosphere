@@ -1,6 +1,5 @@
 <script>
-    /** Event sent to close the modal. */
-    export let onClose = () => {};
+    export let sendCloseModalEvent = () => {};
     export let onApplyFilters = () => {};
 
     /** List of all possible filter options */
@@ -9,38 +8,47 @@
     export let selectedFilterOptions = [];
     export let selectedFilters = {};
 
-    /**
-     * Used to determine if we need to show a select dropdown or a number range as input
-     * @param filterName
-     */
-    function hasNumericOptions(filterName) {
-        return typeof filterOptions[filterName] === "number";
+    function getValueBySelector(selector) {
+      return document.querySelector(selector)?.value; 
+    }
+
+    function getValueBySelectorAsInt(selector) {
+      const value = getValueBySelector(selector);
+      return value ? parseInt(value, 10) : undefined;
+    }
+
+    function getValueBySelectorAsArray(selector) {
+      const values = Array.from(document.querySelector(selector).selectedOptions);
+      return values.map(val => val.value);
     }
 
     function applyFilters() {
-        removeDeselectedFiltersIfAny();
-        selectedFilterOptions.forEach((filterName) => {
-            if (hasNumericOptions(filterName)) {
-                const min = document.querySelector(
-                    `input[name="selectedFilters-${filterName}-min"]`,
-                )?.value;
-                const max = document.querySelector(
-                    `input[name="selectedFilters-${filterName}-max"]`,
-                )?.value;
-
-                selectedFilters[filterName] = {
-                    min: min ? parseInt(min, 10) : undefined,
-                    max: max ? parseInt(max, 10) : undefined,
-                };
-            } else {
-                const filterValue = document.querySelector(
-                    `select[name="selectedFilters-${filterName}"]`,
-                )?.value;
-                selectedFilters[filterName] = filterValue;
-            }
-        });
-        onApplyFilters(selectedFilters);
-        onClose();
+      removeDeselectedFiltersIfAny();
+      selectedFilterOptions.forEach((filterName) => {
+        const baseSelector = `selectedFilters-${filterName}`;
+        switch(filterOptions[filterName].type) {
+        case 'range':
+          selectedFilters[filterName] = {
+            type: 'range',
+            min: getValueBySelectorAsInt(`input[name=${baseSelector}-min]`),
+            max: getValueBySelectorAsInt(`input[name=${baseSelector}-max]`),
+          };
+          break;
+        case 'singleselect':
+          selectedFilters[filterName] = {
+            type: 'singleselect',
+            value: getValueBySelector(`select[name=${baseSelector}]`),
+          };
+          break;
+        case 'multiselect':
+          selectedFilters[filterName] = {
+            type: 'multiselect',
+            values: getValueBySelectorAsArray(`select[name=${baseSelector}]`),
+          }
+        }
+      });
+      onApplyFilters(selectedFilters);
+      sendCloseModalEvent();
     }
 
     /**
@@ -48,61 +56,58 @@
      * This function will remove deselected filters if there are any.
      */
     function removeDeselectedFiltersIfAny() {
-        Object.keys(selectedFilters).forEach(
-            (key) =>
-                selectedFilterOptions.includes(key) ||
-                delete selectedFilters[key],
-        );
+      Object.keys(selectedFilters).forEach((key) =>
+        selectedFilterOptions.includes(key) || delete selectedFilters[key],
+      );
     }
 </script>
 
-<div class="modal" on:click|self={onClose}>
+<div class="modal" on:click|self={sendCloseModalEvent}>
     <div class="modal-content">
         {#if selectedFilterOptions.length >= 1}
             <h2>Choose filter values</h2>
             {#each selectedFilterOptions as filterName}
-                <p>
-                    <label for={filterName}>{keyboardLabels[filterName]}</label>
-                    {#if hasNumericOptions(filterName)}
-                        <div class="range-input">
-                            <input
-                                type="number"
-                                name={`selectedFilters-${filterName}-min`}
-                                placeholder="Min"
-                                value={selectedFilters[filterName]?.min || ""}
-                            />
-                            <span>to</span>
-                            <input
-                                type="number"
-                                name={`selectedFilters-${filterName}-max`}
-                                placeholder="Max"
-                                value={selectedFilters[filterName]?.max || ""}
-                            />
-                        </div>
-                    {:else}
-                        <select
-                            name={`selectedFilters-${filterName}`}
-                            id="selected-filters"
-                        >
-                            {#each filterOptions[filterName] as opt}
-                                <option
-                                    value={opt}
-                                    selected={selectedFilters[filterName] ===
-                                        opt}
-                                >
-                                    {opt}
-                                </option>
-                            {/each}
-                        </select>
-                    {/if}
-                </p>
+                <span class="filter-name">{keyboardLabels[filterName]}:</span>
+                {#if filterOptions[filterName].type === 'range'}
+                    <div class="range-input">
+                        <input
+                            type="number"
+                            name={`selectedFilters-${filterName}-min`}
+                            placeholder="Min"
+                            value={selectedFilters[filterName]?.min || ""}
+                        />
+                        <span>to</span>
+                        <input
+                            type="number"
+                            name={`selectedFilters-${filterName}-max`}
+                            placeholder="Max"
+                            value={selectedFilters[filterName]?.max || ""}
+                        />
+                    </div>
+                {:else if filterOptions[filterName].type === 'singleselect'}
+                    <select name={`selectedFilters-${filterName}`} id="selected-filters">
+                        {#each filterOptions[filterName].value as opt}
+                            <option value={opt} selected={selectedFilters[filterName]?.value === opt}>{opt}</option>
+                        {/each}
+                    </select>
+                {:else if filterOptions[filterName].type === 'multiselect'}
+                    <br /><br />
+                    <select name={`selectedFilters-${filterName}`} multiple>
+                        {#each filterOptions[filterName].value as opt}
+                            <option value={opt} selected={selectedFilters[filterName]?.values?.includes(opt)}>{opt}</option>
+                        {/each}
+                    </select>
+                {/if}
+                <br/><br/>
             {/each}
+
             <button class="filter-apply-btn" on:click={applyFilters}>
                 Apply Filters
             </button>
         {/if}
+
         <h2>Select options to filter</h2>
-        <button on:click={onClose} class="close-button">&times;</button>
+        <button on:click={sendCloseModalEvent} class="close-button">&times;</button>
         <form class="attribute-list">
             {#each Object.entries(filterOptions) as attribute}
                 <div class="attribute-item">
@@ -137,6 +142,9 @@
         justify-content: center;
         align-items: center;
         z-index: 999;
+    }
+
+    .filter-name {
     }
 
     .modal-content {
