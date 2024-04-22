@@ -11,7 +11,7 @@
   }
 </script>
 
-<a href="/board/{keyboard.route}">
+<a class="keeb-link" href="/board/{keyboard.route}">
   <div class="card">
     <div class="card-title">{keyboard.keyboard_name}</div>
     <div class="image-container">
@@ -20,7 +20,12 @@
       {:then src}
         <img {src} alt="An image of {keyboard.keyboard_name}" />
       {:catch error}
-        <div class="error-placeholder">Error loading image</div>
+        <div class="error-placeholder">
+          <p>
+            Hey, you there! Yes, you. Seems like the image URL for this keyboard is broken or doesn't exist.
+            Would you mind making a <a href="https://github.com/rxxed/ergosphere">PR</a> to fix this? Thanks! ^-^
+          </p>
+        </div>
       {/await}
     </div>
     <div class="card-content">
@@ -40,11 +45,12 @@
     font-size: 1.25rem;
   }
 
-  a {
+  .keeb-link {
     text-decoration: none;
     color: inherit;
     display: flex;
     justify-content: center;
+    width: 100%;
   }
 
   .card {
@@ -118,10 +124,11 @@
   .error-placeholder {
     width: 100%;
     height: 200px;
-    background-color: #ffcccc;
     display: flex;
+    flex: 1;
+    display: inline;
     justify-content: center;
     align-items: center;
-    color: red;
+    color: crimson;
   }
 </style>

@@ -162,6 +162,14 @@
     />
 {/if}
 
+<!-- Message shown when no keyboards match the filters -->
+{#if loadedKeyboards.length > 0 && displayedKeyboards.length === 0}
+  <p style="text-align: center">
+      Seems like no keyboards matched your filtering criteria. If you think there's a keyboard that should, please make a
+      <a href="https://github.com/rxxed/ergosphere">PR</a>!
+  </p>
+{/if}
+
 <div class="card-container">
     {#each paginatedKeyboards as keyboard}
         <KeebCard {keyboard} />
@@ -169,17 +177,21 @@
 </div>
 
 <div class="pagination">
-    <a href="?page=1" class:disabled={currentPage === 1}>
+    <a href="?page=1" class:disabled={currentPage === 1 || displayedKeyboards.length === 0}>
         &lt;&lt;
     </a>
-    <a href="?page={currentPage - 1}" class:disabled={currentPage === 1}>
+    <a href="?page={currentPage - 1}" class:disabled={currentPage === 1 || displayedKeyboards.length === 0}>
         &lt;
     </a>
     <span>{currentPage} / {Math.ceil(displayedKeyboards.length / itemsPerPage)}</span>
-    <a href="?page={currentPage + 1}" class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage)}>
+    <a
+        href="?page={currentPage + 1}"
+        class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage) || displayedKeyboards.length === 0}>
         &gt;
     </a>
-    <a href="?page={Math.ceil(displayedKeyboards.length / itemsPerPage)}" class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage)}>
+    <a
+        href="?page={Math.ceil(displayedKeyboards.length / itemsPerPage)}"
+        class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage) || displayedKeyboards.length === 0}>
         &gt;&gt;
     </a>
 </div>
