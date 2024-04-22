@@ -57,11 +57,12 @@
             {#each Object.entries(keyboard) as attribute}
                 <div class="attribute-item">
                     <span>{keyboardLabels[attribute[0]]}</span>
-                    <span class="attribute-divider"></span>
+                    <!-- <span class="attribute-divider"></span> -->
                     <span>{attribute[1]}<br /></span>
                 </div>
             {/each}
         </div>
+        <em class="help-text">See anything missing/wrong? Please raise an issue/PR <a href="https://github.com/rxxed/ergosphere">here</a>.</em>
     </div>
 {:else}
     <p style="text-align: center; margin-top: 10px;">
@@ -100,10 +101,15 @@
         font-size: 1.25rem;
     }
 
+    .help-text {
+       text-align: center;
+       padding: 0 20px;
+    }
+
     .attribute-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 5px;
         padding: 20px;
     }
 
@@ -111,6 +117,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border: 1px solid #000;
+        padding: 20px;
     }
 
     .attribute-divider {
