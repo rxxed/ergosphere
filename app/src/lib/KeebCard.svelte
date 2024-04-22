@@ -1,12 +1,27 @@
 <script>
   export let keyboard = {};
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve(src);
+      img.onerror = (err) => reject(err);
+    });
+  }
 </script>
 
 <a href="/board/{keyboard.route}">
   <div class="card">
     <div class="card-title">{keyboard.keyboard_name}</div>
     <div class="image-container">
-      <img src={keyboard.img_url} alt="An image of {keyboard.keyboard_name}" />
+      {#await loadImage(keyboard.img_url)}
+        <div class="loading-placeholder"></div>
+      {:then src}
+        <img {src} alt="An image of {keyboard.keyboard_name}" />
+      {:catch error}
+        <div class="error-placeholder">Error loading image</div>
+      {/await}
     </div>
     <div class="card-content">
       <div class="card-footer">
@@ -79,7 +94,7 @@
     border-radius: 5px;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1400px) {
     .card {
       max-width: 250px;
     }
@@ -89,5 +104,24 @@
     .card {
       max-width: 80%;
     }
+  }
+
+  .loading-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .error-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #ffcccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
   }
 </style>

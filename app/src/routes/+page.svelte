@@ -162,7 +162,7 @@
     />
 {/if}
 
-<div class="card-container" >
+<div class="card-container">
     {#each paginatedKeyboards as keyboard}
         <KeebCard {keyboard} />
     {/each}
@@ -204,7 +204,7 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;
         justify-items: center;
-        width: 70%;
+        width: 75%;
         margin: auto;
     }
 
