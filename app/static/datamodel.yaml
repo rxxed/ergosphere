@@ -18,14 +18,14 @@ labels:
     is_unibody: Is Unibody?
     has_hotswap: Has Hotswap Sockets?
     mcu_footprint: MCU Footprint
-    wireless: Wireless? # TODO
     prebuilt: Can be bought pre-assembled?
     profile: Profile
     switch_type: Switch Type
     switch_spacing: Switch Spacing
-    display_type: Display Type # TODO
-    has_tenting: Has Tenting? # TODO
-    firmware: Firmware # TODO
+    wireless: Wireless?
+    display_type: Display Type
+    has_tenting: Has Tenting?
+    firmware: Firmware
     link: Source Link
     img_url: Image URL
 
@@ -101,7 +101,7 @@ filter_options:
       value: [MX, Choc]
     display_type:
       type: multiselect
-      value: [None, OLED, E-paper]
+      value: [none, OLED, e-paper]
     has_tenting:
       type: singleselect
       value: [yes, no]

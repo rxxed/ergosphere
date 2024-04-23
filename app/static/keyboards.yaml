@@ -22,6 +22,10 @@ keyboards:
     profile: low
     switch_type: Choc V1
     switch_spacing: Choc
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: ZMK
     link: https://github.com/PJE66/hummingbird
     img_url: https://kbd.news/pic/2022/75/1392.jpg
 
@@ -48,6 +52,10 @@ keyboards:
     profile: [Low, High]
     switch_type: [Choc V1, MX]
     switch_spacing: [Choc, MX]
+    wireless: no
+    display_type: none
+    has_tenting: no
+    firmware: QMK
     link: https://github.com/brow/balbuzard
     img_url: https://github.com/brow/balbuzard/raw/main/images/0.2_brow.jpg
 
@@ -74,6 +82,10 @@ keyboards:
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: ZMK
     link: https://github.com/smores56/osprette
     img_url: https://raw.githubusercontent.com/smores56/osprette/main/images/osprette-front.jpg
 
@@ -100,6 +112,10 @@ keyboards:
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: ZMK
     link: https://github.com/smores56/osprette-v3
     img_url: https://kbd.news/pic/2023/125/2045.jpg
 
@@ -126,6 +142,10 @@ keyboards:
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
+    wireless: yes
+    display_type: e-paper
+    has_tenting: no
+    firmware: ZMK
     link: https://github.com/weteor/Tipper-TF
     img_url: https://raw.githubusercontent.com/weteor/Tipper-TF/main/img/TipperRev2_top_.jpg
 
@@ -152,34 +172,12 @@ keyboards:
     profile: [Low, High]
     switch_type: [MX, Choc V1, Choc V2]
     switch_spacing: MX
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: ZMK
     link: https://github.com/cyril279/keyboards
     img_url: https://github.com/cyril279/keyboards/raw/main/one42/photos/PXL_20211218_015448724.jpg
-
-  - keyboard_name: rev41l2
-    route: rev41l2
-    by: cyril279
-    number_of_keys: [41]
-    is_split: no
-    has_pinky_splay: no
-    has_pinky_cluster: no
-    stagger: column
-    is_parameterized: no
-    is_concave: no
-    is_open_source: yes
-    has_pcb: yes
-    has_trackball: no
-    is_handwired: no
-    has_kit: no
-    prebuilt: no
-    has_encoder: no
-    is_unibody: yes
-    has_hotswap: no
-    mcu_footprint: Pro Micro
-    profile: [Low, High]
-    switch_type: [MX, Choc V1, Choc V2]
-    switch_spacing: MX
-    link: https://github.com/cyril279/keyboards
-    img_url: https://github.com/cyril279/keyboards/raw/main/revlp/41_1353/photos/PXL_20210723_105702713~2.jpg
 
   - keyboard_name: rev41lp
     route: rev41lp
@@ -204,6 +202,10 @@ keyboards:
     profile: Low
     switch_type: Choc V1
     switch_spacing: Choc
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: [QMK, ZMK]
     link: https://github.com/cyril279/keyboards
     img_url: https://github.com/cyril279/keyboards/raw/main/revlp/41_1350/photos/PXL_20210426_002336718.jpg
 
@@ -230,6 +232,10 @@ keyboards:
     profile: High
     switch_type: MX
     switch_spacing: MX
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: QMK
     link: https://github.com/somepin/type-c
     img_url: https://github.com/somepin/type-c/raw/main/img/type-c.jpg
 
@@ -256,6 +262,10 @@ keyboards:
     profile: High
     switch_type: MX
     switch_spacing: MX
+    wireless: yes
+    display_type: OLED
+    has_tenting: no
+    firmware: ZMK
     link: https://github.com/dcpedit/redherring
     img_url: https://user-images.githubusercontent.com/800930/158265769-0780c26f-19fc-43e6-8f18-dc18801a05b9.jpg
 
@@ -282,6 +292,10 @@ keyboards:
     profile: High
     switch_type: MX
     switch_spacing: MX
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: QMK
     link: https://github.com/Bastardkb/Charybdis
     img_url: https://raw.githubusercontent.com/Bastardkb/Charybdis/main/pics/1ae.jpg
 
@@ -308,6 +322,10 @@ keyboards:
     profile: High
     switch_type: MX
     switch_spacing: MX
+    wireless: yes
+    display_type: OLED
+    has_tenting: no
+    firmware: QMK
     link: https://github.com/kata0510/Lily58
     img_url: https://user-images.githubusercontent.com/6285554/84393842-13960900-ac37-11ea-811e-65db2948ca73.jpg
 
@@ -334,6 +352,10 @@ keyboards:
     profile: High
     switch_type: MX
     switch_spacing: MX
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: QMK
     link: https://github.com/gtips/reviung/tree/master/reviung41
     img_url: https://raw.githubusercontent.com/gtips/reviung/master/reviung41/image/REVIUNG41B-1.jpg
 
@@ -360,6 +382,10 @@ keyboards:
     profile: High
     switch_type: MX
     switch_spacing: MX
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: QMK
     link: https://github.com/abstracthat/dactyl-manuform
     img_url: https://camo.githubusercontent.com/3d431aa11a1b1314f7ead63224cbc909bc4dff656a4a65ce7e30139bdeb144f1/687474703a2f2f692e696d6775722e636f6d2f4c646a456872522e6a7067
 
@@ -386,6 +412,10 @@ keyboards:
     profile: [High, Low]
     switch_type: [MX, Choc V1]
     switch_spacing: MX
+    wireless: yes
+    display_type: OLED
+    has_tenting: no
+    firmware: QMK
     link: https://github.com/MangoIV/dracuLad
     img_url: https://raw.githubusercontent.com/mangoiv/draculad/master/pictures/rev1/both_sides_underglow_oleds.jpg
 
@@ -412,5 +442,9 @@ keyboards:
     profile: [High, Low]
     switch_type: [MX, Choc V1]
     switch_spacing: MX
+    wireless: yes
+    display_type: OLED
+    has_tenting: no
+    firmware: [ZMK, QMK]
     link: https://splitkb.com/collections/keyboard-kits/products/kyria-rev3
     img_url: https://splitkb.com/cdn/shop/products/SKB-KYR-B__-030-hero-alt_696x464.jpg?v=1673218766
