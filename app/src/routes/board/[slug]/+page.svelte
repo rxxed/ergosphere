@@ -90,7 +90,6 @@
         width: 100%;
         height: 100%;
         margin-bottom: 10px;
-        overflow-y: auto;
         position: relative;
         border-radius: 18px;
     }

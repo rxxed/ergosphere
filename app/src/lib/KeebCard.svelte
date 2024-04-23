@@ -23,7 +23,7 @@
         <div class="error-placeholder">
           <p>
             Hey, you there! Yes, you. Seems like the image URL for this keyboard is broken or doesn't exist.
-            Would you mind making a <a href="https://github.com/rxxed/ergosphere">PR</a> to fix this? Thanks! ^-^
+            Would you mind making a <a href="https://github.com/rxxed/ergosphere">pull request</a> to fix this? Thanks! ^-^
           </p>
         </div>
       {/await}
@@ -119,6 +119,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loading-placeholder::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      #f0f0f0 0%,
+      #d0d0d0 50%,
+      #f0f0f0 100%
+    );
+    animation: loading-animation 1.5s infinite;
+  }
+
+  @keyframes loading-animation {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(50%);
+    }
   }
 
   .error-placeholder {
@@ -130,5 +157,9 @@
     justify-content: center;
     align-items: center;
     color: crimson;
+  }
+
+  .error-placeholder a {
+    color: inherit;
   }
 </style>

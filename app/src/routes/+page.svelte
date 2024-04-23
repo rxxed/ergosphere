@@ -128,28 +128,75 @@
     }
 </script>
 
-<div class="header-container">
-    <KeebHeader />
-</div>
+<div class="container">
+    <div class="main-content">
+        <div class="header-container">
+            <KeebHeader />
+        </div>
 
-<div class="search-container">
-    <KeebSearch
-        numberOfKeyboards={loadedKeyboards.length}
-        onSearchInput={handleSearchInputChange}
-    />
-</div>
+        <div class="search-container">
+            <KeebSearch
+                numberOfKeyboards={loadedKeyboards.length}
+                onSearchInput={handleSearchInputChange}
+            />
+        </div>
 
-<div class="filter-button-container">
-    <button class="filter-button" on:click={() => (showFilterModal = true)}>
-        Click here to filter
-    </button>
-</div>
-{#if selectedFilters && Object.keys(selectedFilters).length >= 1}
-    <div class="filter-button-container">
-        Showing {displayedKeyboards.length} out of {loadedKeyboards.length} keyboards.
-        <button class="filter-button" on:click={clearFilters}>Clear Filters</button>
+        <div class="filter-button-container">
+            <button class="filter-button" on:click={() => (showFilterModal = true)}>
+                Click here to filter
+            </button>
+        </div>
+        {#if selectedFilters && Object.keys(selectedFilters).length >= 1}
+            <div class="filter-button-container">
+                Showing {displayedKeyboards.length} out of {loadedKeyboards.length} keyboards.
+                <button class="filter-button" on:click={clearFilters}>Clear Filters</button>
+            </div>
+        {/if}
+
+        <!-- Message shown when no keyboards match the filters -->
+        {#if loadedKeyboards.length > 0 && displayedKeyboards.length === 0}
+        <p style="text-align: center">
+            Seems like no keyboards matched your filtering criteria. If you think there's a keyboard that should, please make a
+            <a href="https://github.com/rxxed/ergosphere">PR</a>!
+        </p>
+        {/if}
+
+        <div class="card-container">
+            {#each paginatedKeyboards as keyboard}
+                <KeebCard {keyboard} />
+            {/each}
+        </div>
+
+        {#if loadedKeyboards.length > 0 && displayedKeyboards.length > 0}
+        <div class="pagination">
+            <a href="?page=1" class:disabled={currentPage === 1}>
+                &lt;&lt;
+            </a>
+            <a href="?page={currentPage - 1}" class:disabled={currentPage === 1}>
+                &lt;
+            </a>
+            <span>{currentPage} / {Math.ceil(displayedKeyboards.length / itemsPerPage)}</span>
+            <a
+                href="?page={currentPage + 1}"
+                class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage)}>
+                &gt;
+            </a>
+            <a
+                href="?page={Math.ceil(displayedKeyboards.length / itemsPerPage)}"
+                class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage)}>
+                &gt;&gt;
+            </a>
+        </div>
+        {/if}
     </div>
-{/if}
+
+    <div>
+        <hr />
+    </div>
+    <div class="footer">
+        Check the project out on <a href="https://github.com/rxxed/ergosphere">Github</a>!
+    </div>
+</div>
 
 {#if showFilterModal}
     <KeebFilterModal
@@ -162,41 +209,17 @@
     />
 {/if}
 
-<!-- Message shown when no keyboards match the filters -->
-{#if loadedKeyboards.length > 0 && displayedKeyboards.length === 0}
-  <p style="text-align: center">
-      Seems like no keyboards matched your filtering criteria. If you think there's a keyboard that should, please make a
-      <a href="https://github.com/rxxed/ergosphere">PR</a>!
-  </p>
-{/if}
-
-<div class="card-container">
-    {#each paginatedKeyboards as keyboard}
-        <KeebCard {keyboard} />
-    {/each}
-</div>
-
-<div class="pagination">
-    <a href="?page=1" class:disabled={currentPage === 1 || displayedKeyboards.length === 0}>
-        &lt;&lt;
-    </a>
-    <a href="?page={currentPage - 1}" class:disabled={currentPage === 1 || displayedKeyboards.length === 0}>
-        &lt;
-    </a>
-    <span>{currentPage} / {Math.ceil(displayedKeyboards.length / itemsPerPage)}</span>
-    <a
-        href="?page={currentPage + 1}"
-        class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage) || displayedKeyboards.length === 0}>
-        &gt;
-    </a>
-    <a
-        href="?page={Math.ceil(displayedKeyboards.length / itemsPerPage)}"
-        class:disabled={currentPage === Math.ceil(displayedKeyboards.length / itemsPerPage) || displayedKeyboards.length === 0}>
-        &gt;&gt;
-    </a>
-</div>
-
 <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 98vh;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+
     .search-container {
         display: flex;
         justify-content: center;
@@ -263,6 +286,16 @@
         cursor: not-allowed;
         pointer-events: none;
         opacity: 0.5;
+    }
+
+    .footer {
+      width: 75%;
+      margin: auto;
+      text-align: center;
+    }
+
+    .footer a {
+      color: inherit;
     }
 
     @media (max-width: 1200px) {
