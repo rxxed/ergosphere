@@ -1,6 +1,6 @@
 ## ergosphere
 
-![image](https://github.com/rxxed/ergosphere/assets/16361149/48c46033-38ce-4412-bbcf-3947468b87be)
+![image](https://github.com/rxxed/ergosphere/assets/16361149/9dd0ec60-51ae-4863-b421-ed00d75c8793)
 
 [Ergosphere.club](https://ergosphere.club) is a site that lets you view and filter all kinds of ergonomic keyboards.
 The keyboards and their configurations are all defined in a single YAML file.
