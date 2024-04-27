@@ -3,6 +3,7 @@
     import { page } from '$app/stores';
     import { goto } from '$app/navigation';
     import yaml from "js-yaml";
+    import { browser } from '$app/environment';
 
     import "../styles/global.css";
     import KeebHeader from "../lib/KeebHeader.svelte";
@@ -25,7 +26,7 @@
     $: filterStore.set({ filterOptions, selectedFilters });
 
     /** URL param for current page indication */
-    $: currentPage = parseInt($page.url.searchParams.get('page') || '1');
+    $: currentPage = browser ? parseInt($page.url.searchParams.get('page') || '1') : 1;
     $: paginatedKeyboards = displayedKeyboards.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
