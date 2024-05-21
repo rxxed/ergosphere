@@ -209,6 +209,36 @@ keyboards:
     link: https://github.com/cyril279/keyboards
     img_url: https://github.com/cyril279/keyboards/raw/main/revlp/41_1350/photos/PXL_20210426_002336718.jpg
 
+  - keyboard_name: Paroxysm
+    route: paroxsym
+    by: davidphilipbarr
+    number_of_keys: [34]
+    is_split: yes
+    has_pinky_splay: yes
+    has_pinky_cluster: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: no
+    prebuilt: no
+    has_encoder: no
+    is_unibody: no
+    has_hotswap: no
+    mcu_footprint: Pro Micro
+    profile: [Low]
+    switch_type: [Choc V1]
+    switch_spacing: [Choc]
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: [QMK, ZMK]
+    link: https://github.com/davidphilipbarr/paroxysm
+    img_url: https://raw.githubusercontent.com/davidphilipbarr/paroxysm/main/images/picture.png
+
   - keyboard_name: Type C
     route: type-c
     by: somepin
@@ -448,3 +478,33 @@ keyboards:
     firmware: [ZMK, QMK]
     link: https://splitkb.com/collections/keyboard-kits/products/kyria-rev3
     img_url: https://splitkb.com/cdn/shop/products/SKB-KYR-B__-030-hero-alt_696x464.jpg?v=1673218766
+
+  - keyboard_name: Claudia
+    route: claudia
+    by: subottimale
+    number_of_keys: [34]
+    is_split: no
+    has_pinky_splay: no
+    has_pinky_cluster: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: no
+    prebuilt: no
+    has_encoder: no
+    is_unibody: yes
+    has_hotswap: no
+    mcu_footprint: Pro Micro
+    profile: [High, Low]
+    switch_type: [MX, Choc V1]
+    switch_spacing: MX
+    wireless: yes
+    display_type: OLED
+    has_tenting: no
+    firmware: [QMK]
+    link: https://github.com/subottimale/Claudia
+    img_url: https://user-images.githubusercontent.com/69826495/158947398-a7a238e8-9ad6-47a2-a773-c6056cd856b3.jpg
