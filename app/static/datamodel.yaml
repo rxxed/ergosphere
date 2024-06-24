@@ -80,7 +80,7 @@ filter_options:
       value: [yes, no]
     mcu_footprint:
       type: multiselect
-      value: [Pro Micro, XIAO, Onboard MCU, MS88SF2]
+      value: [Pro Micro, XIAO, Onboard MCU, MS88SF2, N/A]
     wireless:
       type: singleselect
       value: [yes, no]
@@ -101,7 +101,7 @@ filter_options:
       value: [MX, Choc]
     display_type:
       type: multiselect
-      value: [none, OLED, e-paper]
+      value: [none, OLED, e-paper, nice!view]
     has_tenting:
       type: singleselect
       value: [yes, no]

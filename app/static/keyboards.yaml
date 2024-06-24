@@ -508,3 +508,63 @@ keyboards:
     firmware: [QMK]
     link: https://github.com/subottimale/Claudia
     img_url: https://user-images.githubusercontent.com/69826495/158947398-a7a238e8-9ad6-47a2-a773-c6056cd856b3.jpg
+
+  - keyboard_name: Chortyl
+    route: chortyl
+    by: jdart
+    number_of_keys: [34]
+    is_split: yes
+    has_pinky_splay: no
+    has_pinky_cluster: no
+    stagger: column
+    is_parameterized: no
+    is_concave: yes
+    is_open_source: yes
+    has_pcb: no
+    has_trackball: no
+    is_handwired: yes
+    has_kit: no
+    prebuilt: no
+    has_encoder: no
+    is_unibody: no
+    has_hotswap: no
+    mcu_footprint: N/A
+    profile: High
+    switch_type: MX
+    switch_spacing: MX
+    wireless: yes
+    display_type: none
+    has_tenting: no
+    firmware: [QMK]
+    link: https://github.com/jdart/chortyl
+    img_url: https://raw.githubusercontent.com/jdart/chortyl/main/chortyl.jpg
+
+  - keyboard_name: Heartbreak
+    route: heartbreak
+    by: nnandrew
+    number_of_keys: [40]
+    is_split: yes
+    has_pinky_splay: no
+    has_pinky_cluster: no
+    stagger: column
+    is_parameterized: no
+    is_concave: no
+    is_open_source: yes
+    has_pcb: yes
+    has_trackball: no
+    is_handwired: no
+    has_kit: no
+    prebuilt: no
+    has_encoder: yes
+    is_unibody: no
+    has_hotswap: yes
+    mcu_footprint: Pro Micro
+    profile: High
+    switch_type: MX
+    switch_spacing: MX
+    wireless: yes
+    display_type: nice!view
+    has_tenting: no
+    firmware: [ZMK]
+    link: https://github.com/nnandrew/heartbreak
+    img_url: https://user-images.githubusercontent.com/89665539/209635707-873cbbfb-38ac-4ec4-bf04-a68bafcc8092.png

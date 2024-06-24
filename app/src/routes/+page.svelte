@@ -17,7 +17,7 @@
     let displayedKeyboards = [];
     let keyboardLabels = [];
     let showFilterModal = false;
-    let itemsPerPage = 12;
+    let itemsPerPage = 16;
 
     let filterOptions = [];
     let selectedFilters = {};
